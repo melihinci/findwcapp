@@ -1,0 +1,609 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NEREYEAPPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_comment">
+          <Key>
+            <PropertyRef Name="comment_id" />
+          </Key>
+          <Property Name="comment_text" Type="nvarchar(max)" />
+          <Property Name="comment_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="comment_userid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="comment_wcid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="comment_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_error">
+          <Key>
+            <PropertyRef Name="error_id" />
+          </Key>
+          <Property Name="error_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="error_data" Type="nvarchar(max)" />
+          <Property Name="error_exception" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A2834E_NEREYEAPP.dbo.tbl_request' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbl_request">
+          <Key>
+            <PropertyRef Name="Request_Id" />
+            <PropertyRef Name="Request_wc_latitude" />
+            <PropertyRef Name="Request_wc_longtitude" />
+            <PropertyRef Name="Request_date" />
+          </Key>
+          <Property Name="Request_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Request_wc_latitude" Type="float" Nullable="false" />
+          <Property Name="Request_wc_longtitude" Type="float" Nullable="false" />
+          <Property Name="Request_wc_european" Type="bit" />
+          <Property Name="Request_wc_genderfemale" Type="bit" />
+          <Property Name="Request_wc_gendermale" Type="bit" />
+          <Property Name="Request_wc_score" Type="int" />
+          <Property Name="Request_wc_paper" Type="bit" />
+          <Property Name="Request_wc_ablution" Type="bit" />
+          <Property Name="Request_wc_music" Type="bit" />
+          <Property Name="Request_wc_babystop" Type="bit" />
+          <Property Name="Request_wc_fordisabled" Type="bit" />
+          <Property Name="Request_wc_approved" Type="bit" />
+          <Property Name="Request_wc_wifi" Type="bit" />
+          <Property Name="Request_wc_acpower" Type="bit" />
+          <Property Name="Request_wc_traditional" Type="bit" />
+          <Property Name="Request_wc_paid" Type="bit" />
+          <Property Name="Request_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_score">
+          <Key>
+            <PropertyRef Name="score_id" />
+          </Key>
+          <Property Name="score" Type="smallint" Nullable="false" />
+          <Property Name="score_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="score_wcid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="user_id" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="user_surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="user_mail" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="user_deviceId" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="user_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="user_macAddress" Type="nvarchar" MaxLength="32" />
+          <Property Name="user_photourl" Type="nvarchar(max)" />
+          <Property Name="user_token" Type="nvarchar(max)" />
+          <Property Name="user_banned" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_wc">
+          <Key>
+            <PropertyRef Name="wc_id" />
+          </Key>
+          <Property Name="wc_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="wc_name" Type="nvarchar" MaxLength="128" />
+          <Property Name="wc_latitude" Type="float" />
+          <Property Name="wc_longtitude" Type="float" />
+          <Property Name="wc_european" Type="bit" />
+          <Property Name="wc_genderfemale" Type="bit" />
+          <Property Name="wc_gendermale" Type="bit" />
+          <Property Name="wc_score" Type="int" />
+          <Property Name="wc_paper" Type="bit" />
+          <Property Name="wc_ablution" Type="bit" />
+          <Property Name="wc_music" Type="bit" />
+          <Property Name="wc_babystop" Type="bit" />
+          <Property Name="wc_fordisabled" Type="bit" />
+          <Property Name="wc_approved" Type="bit" />
+          <Property Name="wc_notexistreport" Type="int" />
+          <Property Name="wc_type" Type="nvarchar" MaxLength="32" />
+          <Property Name="wc_wifi" Type="bit" />
+          <Property Name="wc_acpower" Type="bit" />
+          <Property Name="wc_traditional" Type="bit" />
+          <Property Name="wc_foreignid" Type="nvarchar" MaxLength="32" />
+          <Property Name="wc_paid" Type="bit" />
+          <Property Name="wc_inappropriatereport" Type="int" Nullable="false" />
+          <Property Name="wc_updateddate" Type="datetime" />
+          <Property Name="wc_createddate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_wcfile">
+          <Key>
+            <PropertyRef Name="wcfile_id" />
+          </Key>
+          <Property Name="wcfile_data" Type="nvarchar(max)" />
+          <Property Name="wcfile_date" Type="date" />
+          <Property Name="wcfile_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="wcfile_wcid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="wcfile_userid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tbl_comment_tbl_user">
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="1" />
+          <End Role="tbl_comment" Type="Self.tbl_comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="tbl_comment">
+              <PropertyRef Name="comment_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_comment_tbl_wc">
+          <End Role="tbl_wc" Type="Self.tbl_wc" Multiplicity="1" />
+          <End Role="tbl_comment" Type="Self.tbl_comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_wc">
+              <PropertyRef Name="wc_id" />
+            </Principal>
+            <Dependent Role="tbl_comment">
+              <PropertyRef Name="comment_wcid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_score_tbl_user">
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="1" />
+          <End Role="tbl_score" Type="Self.tbl_score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="tbl_score">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_score_tbl_wc">
+          <End Role="tbl_wc" Type="Self.tbl_wc" Multiplicity="1" />
+          <End Role="tbl_score" Type="Self.tbl_score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_wc">
+              <PropertyRef Name="wc_id" />
+            </Principal>
+            <Dependent Role="tbl_score">
+              <PropertyRef Name="score_wcid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_wcfile_tbl_user">
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="1" />
+          <End Role="tbl_wcfile" Type="Self.tbl_wcfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="tbl_wcfile">
+              <PropertyRef Name="wcfile_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_wcfile_tbl_wc">
+          <End Role="tbl_wc" Type="Self.tbl_wc" Multiplicity="1" />
+          <End Role="tbl_wcfile" Type="Self.tbl_wcfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_wc">
+              <PropertyRef Name="wc_id" />
+            </Principal>
+            <Dependent Role="tbl_wcfile">
+              <PropertyRef Name="wcfile_wcid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NEREYEAPPModelStoreContainer">
+          <EntitySet Name="tbl_comment" EntityType="Self.tbl_comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_error" EntityType="Self.tbl_error" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_score" EntityType="Self.tbl_score" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_user" EntityType="Self.tbl_user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_wc" EntityType="Self.tbl_wc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_wcfile" EntityType="Self.tbl_wcfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_request" EntityType="Self.tbl_request" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbl_request].[Request_Id] AS [Request_Id], 
+    [tbl_request].[Request_wc_latitude] AS [Request_wc_latitude], 
+    [tbl_request].[Request_wc_longtitude] AS [Request_wc_longtitude], 
+    [tbl_request].[Request_wc_european] AS [Request_wc_european], 
+    [tbl_request].[Request_wc_genderfemale] AS [Request_wc_genderfemale], 
+    [tbl_request].[Request_wc_gendermale] AS [Request_wc_gendermale], 
+    [tbl_request].[Request_wc_score] AS [Request_wc_score], 
+    [tbl_request].[Request_wc_paper] AS [Request_wc_paper], 
+    [tbl_request].[Request_wc_ablution] AS [Request_wc_ablution], 
+    [tbl_request].[Request_wc_music] AS [Request_wc_music], 
+    [tbl_request].[Request_wc_babystop] AS [Request_wc_babystop], 
+    [tbl_request].[Request_wc_fordisabled] AS [Request_wc_fordisabled], 
+    [tbl_request].[Request_wc_approved] AS [Request_wc_approved], 
+    [tbl_request].[Request_wc_wifi] AS [Request_wc_wifi], 
+    [tbl_request].[Request_wc_acpower] AS [Request_wc_acpower], 
+    [tbl_request].[Request_wc_traditional] AS [Request_wc_traditional], 
+    [tbl_request].[Request_wc_paid] AS [Request_wc_paid], 
+    [tbl_request].[Request_date] AS [Request_date]
+    FROM [dbo].[tbl_request] AS [tbl_request]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_tbl_comment_tbl_user" Association="Self.FK_tbl_comment_tbl_user">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="tbl_comment" EntitySet="tbl_comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_comment_tbl_wc" Association="Self.FK_tbl_comment_tbl_wc">
+            <End Role="tbl_wc" EntitySet="tbl_wc" />
+            <End Role="tbl_comment" EntitySet="tbl_comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_score_tbl_user" Association="Self.FK_tbl_score_tbl_user">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="tbl_score" EntitySet="tbl_score" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_score_tbl_wc" Association="Self.FK_tbl_score_tbl_wc">
+            <End Role="tbl_wc" EntitySet="tbl_wc" />
+            <End Role="tbl_score" EntitySet="tbl_score" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_wcfile_tbl_user" Association="Self.FK_tbl_wcfile_tbl_user">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="tbl_wcfile" EntitySet="tbl_wcfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_wcfile_tbl_wc" Association="Self.FK_tbl_wcfile_tbl_wc">
+            <End Role="tbl_wc" EntitySet="tbl_wc" />
+            <End Role="tbl_wcfile" EntitySet="tbl_wcfile" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NEREYEAPPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_comment">
+          <Key>
+            <PropertyRef Name="comment_id" />
+          </Key>
+          <Property Name="comment_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="comment_id" Type="Guid" Nullable="false" />
+          <Property Name="comment_userid" Type="Guid" Nullable="false" />
+          <Property Name="comment_wcid" Type="Guid" Nullable="false" />
+          <Property Name="comment_date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tbl_user" Relationship="Self.FK_tbl_comment_tbl_user" FromRole="tbl_comment" ToRole="tbl_user" />
+          <NavigationProperty Name="tbl_wc" Relationship="Self.FK_tbl_comment_tbl_wc" FromRole="tbl_comment" ToRole="tbl_wc" />
+        </EntityType>
+        <EntityType Name="tbl_error">
+          <Key>
+            <PropertyRef Name="error_id" />
+          </Key>
+          <Property Name="error_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="error_data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="error_exception" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_score">
+          <Key>
+            <PropertyRef Name="score_id" />
+          </Key>
+          <Property Name="score" Type="Int16" Nullable="false" />
+          <Property Name="score_id" Type="Guid" Nullable="false" />
+          <Property Name="score_wcid" Type="Guid" Nullable="false" />
+          <Property Name="user_id" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="tbl_user" Relationship="Self.FK_tbl_score_tbl_user" FromRole="tbl_score" ToRole="tbl_user" />
+          <NavigationProperty Name="tbl_wc" Relationship="Self.FK_tbl_score_tbl_wc" FromRole="tbl_score" ToRole="tbl_wc" />
+        </EntityType>
+        <EntityType Name="tbl_user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_mail" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_deviceId" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_id" Type="Guid" Nullable="false" />
+          <Property Name="user_macAddress" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="user_photourl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="user_token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="user_banned" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbl_comment" Relationship="Self.FK_tbl_comment_tbl_user" FromRole="tbl_user" ToRole="tbl_comment" />
+          <NavigationProperty Name="tbl_score" Relationship="Self.FK_tbl_score_tbl_user" FromRole="tbl_user" ToRole="tbl_score" />
+          <NavigationProperty Name="tbl_wcfile" Relationship="Self.FK_tbl_wcfile_tbl_user" FromRole="tbl_user" ToRole="tbl_wcfile" />
+        </EntityType>
+        <EntityType Name="tbl_wc">
+          <Key>
+            <PropertyRef Name="wc_id" />
+          </Key>
+          <Property Name="wc_id" Type="Guid" Nullable="false" />
+          <Property Name="wc_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="wc_latitude" Type="Double" />
+          <Property Name="wc_longtitude" Type="Double" />
+          <Property Name="wc_european" Type="Boolean" />
+          <Property Name="wc_genderfemale" Type="Boolean" />
+          <Property Name="wc_gendermale" Type="Boolean" />
+          <Property Name="wc_score" Type="Int32" />
+          <Property Name="wc_paper" Type="Boolean" />
+          <Property Name="wc_ablution" Type="Boolean" />
+          <Property Name="wc_music" Type="Boolean" />
+          <Property Name="wc_babystop" Type="Boolean" />
+          <Property Name="wc_fordisabled" Type="Boolean" />
+          <Property Name="wc_approved" Type="Boolean" />
+          <Property Name="wc_notexistreport" Type="Int32" />
+          <Property Name="wc_type" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="wc_wifi" Type="Boolean" />
+          <Property Name="wc_acpower" Type="Boolean" />
+          <Property Name="wc_traditional" Type="Boolean" />
+          <Property Name="wc_foreignid" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="wc_paid" Type="Boolean" />
+          <Property Name="wc_inappropriatereport" Type="Int32" Nullable="false" />
+          <Property Name="wc_updateddate" Type="DateTime" Precision="3" />
+          <Property Name="wc_createddate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tbl_comment" Relationship="Self.FK_tbl_comment_tbl_wc" FromRole="tbl_wc" ToRole="tbl_comment" />
+          <NavigationProperty Name="tbl_score" Relationship="Self.FK_tbl_score_tbl_wc" FromRole="tbl_wc" ToRole="tbl_score" />
+          <NavigationProperty Name="tbl_wcfile" Relationship="Self.FK_tbl_wcfile_tbl_wc" FromRole="tbl_wc" ToRole="tbl_wcfile" />
+        </EntityType>
+        <EntityType Name="tbl_wcfile">
+          <Key>
+            <PropertyRef Name="wcfile_id" />
+          </Key>
+          <Property Name="wcfile_data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="wcfile_date" Type="DateTime" Precision="0" />
+          <Property Name="wcfile_id" Type="Guid" Nullable="false" />
+          <Property Name="wcfile_wcid" Type="Guid" Nullable="false" />
+          <Property Name="wcfile_userid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="tbl_user" Relationship="Self.FK_tbl_wcfile_tbl_user" FromRole="tbl_wcfile" ToRole="tbl_user" />
+          <NavigationProperty Name="tbl_wc" Relationship="Self.FK_tbl_wcfile_tbl_wc" FromRole="tbl_wcfile" ToRole="tbl_wc" />
+        </EntityType>
+        <EntityType Name="tbl_request">
+          <Key>
+            <PropertyRef Name="Request_Id" />
+            <PropertyRef Name="Request_wc_latitude" />
+            <PropertyRef Name="Request_wc_longtitude" />
+            <PropertyRef Name="Request_date" />
+          </Key>
+          <Property Name="Request_Id" Type="Guid" Nullable="false" />
+          <Property Name="Request_wc_latitude" Type="Double" Nullable="false" />
+          <Property Name="Request_wc_longtitude" Type="Double" Nullable="false" />
+          <Property Name="Request_wc_european" Type="Boolean" />
+          <Property Name="Request_wc_genderfemale" Type="Boolean" />
+          <Property Name="Request_wc_gendermale" Type="Boolean" />
+          <Property Name="Request_wc_score" Type="Int32" />
+          <Property Name="Request_wc_paper" Type="Boolean" />
+          <Property Name="Request_wc_ablution" Type="Boolean" />
+          <Property Name="Request_wc_music" Type="Boolean" />
+          <Property Name="Request_wc_babystop" Type="Boolean" />
+          <Property Name="Request_wc_fordisabled" Type="Boolean" />
+          <Property Name="Request_wc_approved" Type="Boolean" />
+          <Property Name="Request_wc_wifi" Type="Boolean" />
+          <Property Name="Request_wc_acpower" Type="Boolean" />
+          <Property Name="Request_wc_traditional" Type="Boolean" />
+          <Property Name="Request_wc_paid" Type="Boolean" />
+          <Property Name="Request_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_tbl_comment_tbl_user">
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="1" />
+          <End Role="tbl_comment" Type="Self.tbl_comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="tbl_comment">
+              <PropertyRef Name="comment_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_comment_tbl_wc">
+          <End Role="tbl_wc" Type="Self.tbl_wc" Multiplicity="1" />
+          <End Role="tbl_comment" Type="Self.tbl_comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_wc">
+              <PropertyRef Name="wc_id" />
+            </Principal>
+            <Dependent Role="tbl_comment">
+              <PropertyRef Name="comment_wcid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_score_tbl_user">
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="1" />
+          <End Role="tbl_score" Type="Self.tbl_score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="tbl_score">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_score_tbl_wc">
+          <End Role="tbl_wc" Type="Self.tbl_wc" Multiplicity="1" />
+          <End Role="tbl_score" Type="Self.tbl_score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_wc">
+              <PropertyRef Name="wc_id" />
+            </Principal>
+            <Dependent Role="tbl_score">
+              <PropertyRef Name="score_wcid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_wcfile_tbl_user">
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="1" />
+          <End Role="tbl_wcfile" Type="Self.tbl_wcfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="tbl_wcfile">
+              <PropertyRef Name="wcfile_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_wcfile_tbl_wc">
+          <End Role="tbl_wc" Type="Self.tbl_wc" Multiplicity="1" />
+          <End Role="tbl_wcfile" Type="Self.tbl_wcfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_wc">
+              <PropertyRef Name="wc_id" />
+            </Principal>
+            <Dependent Role="tbl_wcfile">
+              <PropertyRef Name="wcfile_wcid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NEREYEAPPEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_comment" EntityType="Self.tbl_comment" />
+          <EntitySet Name="tbl_error" EntityType="Self.tbl_error" />
+          <EntitySet Name="tbl_score" EntityType="Self.tbl_score" />
+          <EntitySet Name="tbl_user" EntityType="Self.tbl_user" />
+          <EntitySet Name="tbl_wc" EntityType="Self.tbl_wc" />
+          <EntitySet Name="tbl_wcfile" EntityType="Self.tbl_wcfile" />
+          <EntitySet Name="tbl_request" EntityType="Self.tbl_request" />
+          <AssociationSet Name="FK_tbl_comment_tbl_user" Association="Self.FK_tbl_comment_tbl_user">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="tbl_comment" EntitySet="tbl_comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_comment_tbl_wc" Association="Self.FK_tbl_comment_tbl_wc">
+            <End Role="tbl_wc" EntitySet="tbl_wc" />
+            <End Role="tbl_comment" EntitySet="tbl_comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_score_tbl_user" Association="Self.FK_tbl_score_tbl_user">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="tbl_score" EntitySet="tbl_score" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_score_tbl_wc" Association="Self.FK_tbl_score_tbl_wc">
+            <End Role="tbl_wc" EntitySet="tbl_wc" />
+            <End Role="tbl_score" EntitySet="tbl_score" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_wcfile_tbl_user" Association="Self.FK_tbl_wcfile_tbl_user">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="tbl_wcfile" EntitySet="tbl_wcfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_wcfile_tbl_wc" Association="Self.FK_tbl_wcfile_tbl_wc">
+            <End Role="tbl_wc" EntitySet="tbl_wc" />
+            <End Role="tbl_wcfile" EntitySet="tbl_wcfile" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NEREYEAPPModelStoreContainer" CdmEntityContainer="NEREYEAPPEntities2">
+          <EntitySetMapping Name="tbl_comment">
+            <EntityTypeMapping TypeName="NEREYEAPPModel.tbl_comment">
+              <MappingFragment StoreEntitySet="tbl_comment">
+                <ScalarProperty Name="comment_text" ColumnName="comment_text" />
+                <ScalarProperty Name="comment_id" ColumnName="comment_id" />
+                <ScalarProperty Name="comment_userid" ColumnName="comment_userid" />
+                <ScalarProperty Name="comment_wcid" ColumnName="comment_wcid" />
+                <ScalarProperty Name="comment_date" ColumnName="comment_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_error">
+            <EntityTypeMapping TypeName="NEREYEAPPModel.tbl_error">
+              <MappingFragment StoreEntitySet="tbl_error">
+                <ScalarProperty Name="error_id" ColumnName="error_id" />
+                <ScalarProperty Name="error_data" ColumnName="error_data" />
+                <ScalarProperty Name="error_exception" ColumnName="error_exception" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_score">
+            <EntityTypeMapping TypeName="NEREYEAPPModel.tbl_score">
+              <MappingFragment StoreEntitySet="tbl_score">
+                <ScalarProperty Name="score" ColumnName="score" />
+                <ScalarProperty Name="score_id" ColumnName="score_id" />
+                <ScalarProperty Name="score_wcid" ColumnName="score_wcid" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_user">
+            <EntityTypeMapping TypeName="NEREYEAPPModel.tbl_user">
+              <MappingFragment StoreEntitySet="tbl_user">
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="user_surname" ColumnName="user_surname" />
+                <ScalarProperty Name="user_mail" ColumnName="user_mail" />
+                <ScalarProperty Name="user_deviceId" ColumnName="user_deviceId" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_macAddress" ColumnName="user_macAddress" />
+                <ScalarProperty Name="user_photourl" ColumnName="user_photourl" />
+                <ScalarProperty Name="user_token" ColumnName="user_token" />
+                <ScalarProperty Name="user_banned" ColumnName="user_banned" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_wc">
+            <EntityTypeMapping TypeName="NEREYEAPPModel.tbl_wc">
+              <MappingFragment StoreEntitySet="tbl_wc">
+                <ScalarProperty Name="wc_id" ColumnName="wc_id" />
+                <ScalarProperty Name="wc_name" ColumnName="wc_name" />
+                <ScalarProperty Name="wc_latitude" ColumnName="wc_latitude" />
+                <ScalarProperty Name="wc_longtitude" ColumnName="wc_longtitude" />
+                <ScalarProperty Name="wc_european" ColumnName="wc_european" />
+                <ScalarProperty Name="wc_genderfemale" ColumnName="wc_genderfemale" />
+                <ScalarProperty Name="wc_gendermale" ColumnName="wc_gendermale" />
+                <ScalarProperty Name="wc_score" ColumnName="wc_score" />
+                <ScalarProperty Name="wc_paper" ColumnName="wc_paper" />
+                <ScalarProperty Name="wc_ablution" ColumnName="wc_ablution" />
+                <ScalarProperty Name="wc_music" ColumnName="wc_music" />
+                <ScalarProperty Name="wc_babystop" ColumnName="wc_babystop" />
+                <ScalarProperty Name="wc_fordisabled" ColumnName="wc_fordisabled" />
+                <ScalarProperty Name="wc_approved" ColumnName="wc_approved" />
+                <ScalarProperty Name="wc_notexistreport" ColumnName="wc_notexistreport" />
+                <ScalarProperty Name="wc_type" ColumnName="wc_type" />
+                <ScalarProperty Name="wc_wifi" ColumnName="wc_wifi" />
+                <ScalarProperty Name="wc_acpower" ColumnName="wc_acpower" />
+                <ScalarProperty Name="wc_traditional" ColumnName="wc_traditional" />
+                <ScalarProperty Name="wc_foreignid" ColumnName="wc_foreignid" />
+                <ScalarProperty Name="wc_paid" ColumnName="wc_paid" />
+                <ScalarProperty Name="wc_inappropriatereport" ColumnName="wc_inappropriatereport" />
+                <ScalarProperty Name="wc_updateddate" ColumnName="wc_updateddate" />
+                <ScalarProperty Name="wc_createddate" ColumnName="wc_createddate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_wcfile">
+            <EntityTypeMapping TypeName="NEREYEAPPModel.tbl_wcfile">
+              <MappingFragment StoreEntitySet="tbl_wcfile">
+                <ScalarProperty Name="wcfile_data" ColumnName="wcfile_data" />
+                <ScalarProperty Name="wcfile_date" ColumnName="wcfile_date" />
+                <ScalarProperty Name="wcfile_id" ColumnName="wcfile_id" />
+                <ScalarProperty Name="wcfile_wcid" ColumnName="wcfile_wcid" />
+                <ScalarProperty Name="wcfile_userid" ColumnName="wcfile_userid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_request">
+            <EntityTypeMapping TypeName="NEREYEAPPModel.tbl_request">
+              <MappingFragment StoreEntitySet="tbl_request">
+                <ScalarProperty Name="Request_Id" ColumnName="Request_Id" />
+                <ScalarProperty Name="Request_wc_latitude" ColumnName="Request_wc_latitude" />
+                <ScalarProperty Name="Request_wc_longtitude" ColumnName="Request_wc_longtitude" />
+                <ScalarProperty Name="Request_wc_european" ColumnName="Request_wc_european" />
+                <ScalarProperty Name="Request_wc_genderfemale" ColumnName="Request_wc_genderfemale" />
+                <ScalarProperty Name="Request_wc_gendermale" ColumnName="Request_wc_gendermale" />
+                <ScalarProperty Name="Request_wc_score" ColumnName="Request_wc_score" />
+                <ScalarProperty Name="Request_wc_paper" ColumnName="Request_wc_paper" />
+                <ScalarProperty Name="Request_wc_ablution" ColumnName="Request_wc_ablution" />
+                <ScalarProperty Name="Request_wc_music" ColumnName="Request_wc_music" />
+                <ScalarProperty Name="Request_wc_babystop" ColumnName="Request_wc_babystop" />
+                <ScalarProperty Name="Request_wc_fordisabled" ColumnName="Request_wc_fordisabled" />
+                <ScalarProperty Name="Request_wc_approved" ColumnName="Request_wc_approved" />
+                <ScalarProperty Name="Request_wc_wifi" ColumnName="Request_wc_wifi" />
+                <ScalarProperty Name="Request_wc_acpower" ColumnName="Request_wc_acpower" />
+                <ScalarProperty Name="Request_wc_traditional" ColumnName="Request_wc_traditional" />
+                <ScalarProperty Name="Request_wc_paid" ColumnName="Request_wc_paid" />
+                <ScalarProperty Name="Request_date" ColumnName="Request_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
